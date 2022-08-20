@@ -11,7 +11,7 @@ ISFTFileLibrary >> logoJpg [
 
 { #category : #uploaded }
 ISFTFileLibrary >> styleCss [
-	^ '* {
+	^ '''''{
   box-sizing: border-box;
 }
 

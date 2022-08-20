@@ -51,7 +51,7 @@ html div
 	].
 ]
 
-{ #category : #rendering }
+{ #category : #'private ' }
 ISFT >> renderFooterOn: html [
 	html div 
 		class: 'footer';
