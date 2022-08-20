@@ -20,9 +20,9 @@ body {
 }
 
 #logoImg {
-	padding: 30px;
-	height: 400px;
-	width: 1200px;
+  padding: 30px;
+  height: 400px;
+  width: 1200px;
 }
 /* Style the header */
 .header {
