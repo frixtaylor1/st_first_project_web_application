@@ -11,7 +11,8 @@ ISFTFileLibrary >> logoJpg [
 
 { #category : #uploaded }
 ISFTFileLibrary >> styleCss [
-	^ '''''{
+	^ 'guarde algo en el texto con una accion font-family: Arial, Helvetica, sans-serif;
+* {
   box-sizing: border-box;
 }
 
@@ -19,11 +20,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-#logoImg {
-  padding: 30px;
-  height: 400px;
-  width: 1200px;
-}
 /* Style the header */
 .header {
   background-color: #f1f1f1;
@@ -39,15 +35,7 @@ body {
   padding: 10px;
   height: 300px; /* Should be removed. Only for demonstration */
 }
-#column1 {
-  background-color:#aaa;
-}
-#column2 {
-  background-color:#bbb;
-}
-#column3 {
-  background-color:#ccc;
-}
+
 /* Clear floats after the columns */
 .row:after {
   content: "";

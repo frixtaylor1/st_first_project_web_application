@@ -1,63 +1,50 @@
 Class {
 	#name : #ISFTCssPresenter,
 	#superclass : #SpTextPresenter,
+	#instVars : [
+		'fileName',
+		'syntaxHighlightTheme',
+		'cssTextFile'
+	],
 	#classInstVars : [
 		'cssFileText',
-		'buttonBar'
+		'buttonBar',
+		'fileName',
+		'syntaxHighlightTheme'
 	],
 	#category : #'ISFT-Web-Application'
 }
 
-{ #category : #emulating }
-ISFTCssPresenter class >> buttonClicked [
+{ #category : #accessing }
+ISFTCssPresenter class >> cssFileContent [
+	^ cssFileText.
+]
 
-	| file |
-	file := File named: 'C:\temp\style.css' asFileReference fullName.
-	file openForWrite.
-	file writeStreamDo: [ :stream | 
-		stream nextPutAll: self text printString ].
-	file close
+{ #category : #'instance creation' }
+ISFTCssPresenter class >> fileNamed: aString [ 
+	fileName := aString.
 ]
 
 { #category : #'class initialization' }
 ISFTCssPresenter class >> initialize [
-	| presenter |
-	
-	self title.
-	self initializeFileText.
-	"A generic presenter with a list and an action bar"	
-	(presenter := SpPresenter new) 
-		layout: (SpBoxLayout newTopToBottom
-			spacing: 5; 
-			add: (self new
-						text: cssFileText;
-						beEditable);
-			add: (buttonBar := presenter newButtonBar) expand: false;
-			yourself).	
-		
-	buttonBar
-		"We want to place the button or the buttons at the end (as is often used in dialogs)"
-		placeAtEnd;
-		add: (presenter newButton
-			icon: (presenter application iconNamed: #smallAdd);
-			label: 'save';
-			yourself).
-	presenter open.
+	self initializeCssFileText.
+	^ self new
+		  text: self cssFileContent asString;
+		  open.
 	
 ]
 
 { #category : #initialization }
-ISFTCssPresenter class >> initializeFileText [
-	| file |
-	file := File named: 'C:\temp\style.css' asFileReference fullName.
-	file readStreamDo: [ :stream | 
+ISFTCssPresenter class >> initializeCssFileText [
+	((fileName asString) asFileReference) fullName;
+	 readStreamDo: [ :stream |
 		cssFileText := (stream upToEnd) asString.
 	].
 ]
 
 { #category : #accessing }
 ISFTCssPresenter class >> text [
-	^self text.
+	^ super text.
 ]
 
 { #category : #specs }
@@ -65,12 +52,46 @@ ISFTCssPresenter class >> title [
 	^ 'CSS of ISFT Web Application'
 ]
 
+{ #category : #'instance creation' }
+ISFTCssPresenter >> fileNamed: aFile [
+	fileName := aFile.
+]
+
 { #category : #initialization }
 ISFTCssPresenter >> initialize [
 	super initialize.
+	self onClickButton.
+]
+
+{ #category : #initialization }
+ISFTCssPresenter >> onClickButton [
+
+	self whenSubmitDo: self saveChangesOnCssFileText
+]
+
+{ #category : #initialization }
+ISFTCssPresenter >> saveChangesOnCssFileText [
+	((fileName asString) asFileReference)
+		writeStreamDo: [ :stream |
+		stream nextPutAll: 'Hello World!! es un NUEVO TEXTO VIEJA!!!'.
+	].
+	Transcript show: cssTextFile asString.
+]
+
+{ #category : #accessing }
+ISFTCssPresenter >> syntaxHighlightTheme [
+	"The name of the syntax highlight theme to use (e.g. 'Blue', 'Vintage', 'Solarized', 'Tango'). 
+	 If not defined, the component will take the default value from the system."
+
+	^ syntaxHighlightTheme.
 ]
 
 { #category : #accessing }
 ISFTCssPresenter >> title [
 	^ 'Css ISFT presenter'
+]
+
+{ #category : #initialization }
+ISFTCssPresenter >> value: aString [ 
+  cssTextFile := aString.
 ]
