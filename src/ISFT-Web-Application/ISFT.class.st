@@ -11,7 +11,7 @@ ISFT class >> initialize [
 	preferenceAt: #sessionClass put: WASession; yourself.
 ]
 
-{ #category : #'private ' }
+{ #category : #private }
 ISFT >> renderBodyOn: html [
 	html div
 			id: 'body';
@@ -40,7 +40,7 @@ ISFT >> renderBodyOn: html [
 
 { #category : #rendering }
 ISFT >> renderContentOn: html [
-html div
+	html div
 	id: 'allContent';
 	with: [ 
 		self 
@@ -51,7 +51,7 @@ html div
 	].
 ]
 
-{ #category : #'private ' }
+{ #category : #private }
 ISFT >> renderFooterOn: html [
 	html div 
 		class: 'footer';
@@ -61,7 +61,7 @@ ISFT >> renderFooterOn: html [
 	
 ]
 
-{ #category : #'private ' }
+{ #category : #private }
 ISFT >> renderHeaderOn: html [
 	html div
 			class: 'header';

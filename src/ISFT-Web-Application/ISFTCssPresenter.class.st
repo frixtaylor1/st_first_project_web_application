@@ -31,12 +31,11 @@ ISFTCssPresenter class >> initialize [
 	^ self new
 		  text: self cssFileContent asString;
 		  open.
-	
 ]
 
 { #category : #initialization }
 ISFTCssPresenter class >> initializeCssFileText [
-	((fileName asString) asFileReference) fullName;
+	((fileName asString) asFileReference)
 	 readStreamDo: [ :stream |
 		cssFileText := (stream upToEnd) asString.
 	].
@@ -52,46 +51,22 @@ ISFTCssPresenter class >> title [
 	^ 'CSS of ISFT Web Application'
 ]
 
-{ #category : #'instance creation' }
-ISFTCssPresenter >> fileNamed: aFile [
-	fileName := aFile.
-]
-
 { #category : #initialization }
 ISFTCssPresenter >> initialize [
 	super initialize.
-	self onClickButton.
+	self whenSubmitDo: (self saveChangesOnCssFileText: 'Hola' asString).
+	
 ]
 
 { #category : #initialization }
-ISFTCssPresenter >> onClickButton [
-
-	self whenSubmitDo: self saveChangesOnCssFileText
-]
-
-{ #category : #initialization }
-ISFTCssPresenter >> saveChangesOnCssFileText [
-	((fileName asString) asFileReference)
+ISFTCssPresenter >> saveChangesOnCssFileText: aString [
+	((fileName asString) asFileReference) ensureDelete;
 		writeStreamDo: [ :stream |
-		stream nextPutAll: 'Hello World!! es un NUEVO TEXTO VIEJA!!!'.
-	].
-	Transcript show: cssTextFile asString.
+			stream nextPutAll: aString.
+		].
 ]
 
-{ #category : #accessing }
-ISFTCssPresenter >> syntaxHighlightTheme [
-	"The name of the syntax highlight theme to use (e.g. 'Blue', 'Vintage', 'Solarized', 'Tango'). 
-	 If not defined, the component will take the default value from the system."
-
-	^ syntaxHighlightTheme.
-]
-
-{ #category : #accessing }
-ISFTCssPresenter >> title [
-	^ 'Css ISFT presenter'
-]
-
-{ #category : #initialization }
+{ #category : #setter }
 ISFTCssPresenter >> value: aString [ 
-  cssTextFile := aString.
+	cssTextFile := aString.
 ]

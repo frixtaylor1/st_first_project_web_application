@@ -11,8 +11,7 @@ ISFTFileLibrary >> logoJpg [
 
 { #category : #uploaded }
 ISFTFileLibrary >> styleCss [
-	^ 'guarde algo en el texto con una accion font-family: Arial, Helvetica, sans-serif;
-* {
+	^ '* {
   box-sizing: border-box;
 }
 
